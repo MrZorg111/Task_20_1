@@ -4,25 +4,18 @@
 
 
 bool check (std::string text) {
-    std::string day = " ", month = " ", year = " ";
-    for (int i = 0; i < text.length(); i++) {
-        if (i < 2) {
-            day += text[i];
-        }
-        if (i > 2 && i < 5) {
-            month += text[i];
-        }
-        if (i > 5) {
-            year += text[i];
-        }
-    }
-    std::cout << "day " << day << " Month " << month << " Year " << year << "\n";
-    if ((stoi(day) > 0 && stoi(day) <= 31) && (stoi(month) == 1 || stoi(month) == 3 || stoi(month) == 5 || stoi(month) == 7 || stoi(month) == 8 || stoi(month) == 10 || stoi(month) == 12) && stoi(year) == 2022) {return true;}
-    else if ((stoi(day) > 0 && stoi(day) <= 30) && (stoi(month) == 4 || stoi(month) == 6 || stoi(month) == 9 || stoi(month) == 11) && stoi(year) == 2022) {return true;}
-    else if ((stoi(day) > 0 && stoi(day) <= 28) && (stoi(month) == 2) && stoi(year) == 2022) {return true;}
-    else {
-        return false;
-    }
+    if ((stoi(text.substr(0, 2)) > 0 && stoi(text.substr(0, 2)) <= 31) &&
+        (stoi(text.substr(3, 2)) == 1 || stoi(text.substr(3, 2)) == 3 ||
+            stoi(text.substr(3, 2)) == 5 || stoi(text.substr(0, 2)) == 7 ||
+                stoi(text.substr(3, 2)) == 8 || stoi(text.substr(3, 2)) == 10 ||
+                    stoi(text.substr(3, 2)) == 12) && stoi(text.substr(6)) == 2022) {return true;}
+    else if ((stoi(text.substr(0, 2)) > 0 && stoi(text.substr(0, 2)) <= 30) &&
+        (stoi(text.substr(3, 2)) == 4 || stoi(text.substr(3, 2)) == 6 ||
+            stoi(text.substr(3, 2)) == 9 || stoi(text.substr(3, 2)) == 11) &&
+                stoi(text.substr(6)) == 2022) {return true;}
+    else if ((stoi(text.substr(0, 2)) > 0 && stoi(text.substr(0, 2)) <= 28) &&
+        (stoi(text.substr(3, 2)) == 2) && stoi(text.substr(6)) == 2022) {return true;}
+    else { return false;}
 }
 int main() {
     std::string data, answer = "yes";
@@ -47,6 +40,7 @@ int main() {
         for (int i = 0; i < 4; i++) {
             file << " " << preparation[i];
         }
+        file << "\n";
         std::cout << "Would you like to continue entering data (yes/no):";
         std::cin >> answer;
 
